@@ -7,15 +7,15 @@ import Success from './Success';
 export class UserForm extends Component {
   state = {
     step: 1,
-    email: null,
-    password: null,
-    confirmPass: null,
-    birthday: null,
-    phone: null,
-    country: null,
-    avatar: null,
-    status: null,
-    about: null
+    email: '',
+    password: '',
+    confirmPass: '',
+    birthday: '',
+    phone: '',
+    country: '',
+    avatar: '',
+    status: '',
+    about: ''
   };
 
   // Proceed to next step
@@ -23,14 +23,6 @@ export class UserForm extends Component {
     const { step } = this.state;
     this.setState({
       step: step + 1
-    });
-  };
-
-  // Go back to prev step
-  prevStep = () => {
-    const { step } = this.state;
-    this.setState({
-      step: step - 1
     });
   };
 
@@ -57,7 +49,6 @@ export class UserForm extends Component {
         return (
           <Second
             nextStep={this.nextStep}
-            prevStep={this.prevStep}
             handleChange={this.handleChange}
             values={values}
           />
@@ -66,7 +57,6 @@ export class UserForm extends Component {
         return (
           <Third
             nextStep={this.nextStep}
-            prevStep={this.prevStep}
             handleChange={this.handleChange}
             values={values}
           />
