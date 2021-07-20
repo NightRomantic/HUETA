@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Button from 'react-bootstrap/Button';
 import * as Yup from 'yup';
 
 
@@ -57,7 +56,8 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
             {stepNumber > 0 && (
               <Button
                 onClick={() => previous(formik.values)}
-                color="primary" variant="contained"
+                disabled={isLastStep}
+                variant="primary"
                 type="button"
                 style={{marginRight: '15px'}}
               >
@@ -67,7 +67,7 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
             <div>
               <Button
                 disabled={formik.isSubmitting} type="submit"
-                color="primary" variant="contained"
+                variant="primary"
               >
                 {isLastStep ? 'Submit' : 'Next'}
               </Button>
