@@ -17,7 +17,7 @@ export default class First extends Component {
     this.props.nextStep();
   };
   render() {
-    const { values } = this.props;
+    const { info } = this.props;
     return (
       <div
         style={{
@@ -31,15 +31,15 @@ export default class First extends Component {
           validationSchema={SignupSchema}
           validateOnChange={false}
           validateOnBlur={false}
-          onSubmit={this.continue}
+          onSubmit={values => {console.log(values)}}
           initialValues={{
-            email: values.email,
-            password: values.password,
-            confirmPass: values.confirmPass,
+            email: info.email,
+            password: info.password,
+            confirmPass: info.confirmPass,
           }}
         >
-          {({ handleSubmit, handleChange, values, errors }) => (
-            <Form noValidate onSubmit={handleSubmit}>
+          {({handleChange, values, errors }) => (
+            <Form>
               <Row className="mb-3">
                 <Form.Group controlId="validationFormikEmail">
                   <Form.Label>Email address</Form.Label>

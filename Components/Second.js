@@ -7,7 +7,8 @@ export default class Second extends Component {
     this.props.nextStep();
   };
   render() {
-    const { values } = this.props;
+    const { info } = this.props;
+    console.log(info);
     return (
       <div
         style={{
@@ -20,9 +21,9 @@ export default class Second extends Component {
         <Formik
           onSubmit={this.continue}
           initialValues={{
-            birthday: values.birthday,
-            phone: values.phone,
-            country: values.country,
+            birthday: info.birthday,
+            phone: info.phone,
+            country: info.country,
           }}
         >
           {({ handleSubmit, handleChange, values }) => (

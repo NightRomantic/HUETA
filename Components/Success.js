@@ -5,19 +5,13 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 export class Success extends Component {
   continue = e => {
-    e.preventDefault();
-    // PROCESS FORM //
     this.props.nextStep();
   };
 
-  back = e => {
-    e.preventDefault();
-    this.props.prevStep();
-  };
 
   render() {
     const { values } = this.props;
-    console.log(JSON.stringify(values));
+    console.log(values);
     return (
           <Dialog
             open
