@@ -32,7 +32,6 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
       await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
-      next();
       return onSubmit(values, bag);
     } else {
       bag.setTouched({});
