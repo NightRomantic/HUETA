@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const Wizard = ({ children, initialValues, onSubmit }) => {
+  const isDisabled = false;
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
   const [snapshot, setSnapshot] = useState(initialValues);
@@ -31,6 +32,7 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
       await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
+      next();
       return onSubmit(values, bag);
     } else {
       bag.setTouched({});
@@ -51,8 +53,8 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
             {stepNumber > 0 && (
               <Button
                 onClick={() => previous(formik.values)}
-                disabled={isLastStep}
                 variant="primary"
+                disabled={formik.isSubmitting}
                 type="button"
                 style={{marginRight: '15px'}}
               >
@@ -99,11 +101,13 @@ const UserForm = () => (
         about: '',
       }}
       onSubmit={async values =>
-        sleep(300).then(() => console.log('Wizard submit', values))
+        await sleep(3000).then(() => console.log('Wizard submit', values))
       }
     >
       <WizardStep
-        onSubmit={() => console.log('Step1 onSubmit')}
+        onSubmit={async values =>
+          await sleep(3000).then(() => console.log('Step 1 submit'))
+        }
         validationSchema={Yup.object({
           email: Yup.string().email("Invalid email").required("Required"),
           password: Yup.string().min(7, "Too Shot!").required("Required!"),
@@ -159,7 +163,9 @@ const UserForm = () => (
         </div>
       </WizardStep>
       <WizardStep
-        onSubmit={() => console.log('Step2 onSubmit')}
+        onSubmit={async values =>
+          await sleep(3000).then(() => console.log('Step 2 submit'))
+        }
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <label htmlFor="birthday">Birthday</label>
@@ -204,7 +210,9 @@ const UserForm = () => (
         </div>
       </WizardStep>
       <WizardStep
-        onSubmit={() => console.log('Step3 onSubmit')}
+        onSubmit={async values =>
+          await sleep(3000).then(() => console.log('Step 3 submit'))
+        }
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <label htmlFor="avatar">Avatar</label>
